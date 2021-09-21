@@ -2,8 +2,8 @@ import { render, screen } from "@testing-library/react";
 
 import App from "../App";
 
-describe("TodoList", () => {
-  it("renders appropriately", () => {
+describe("App", () => {
+  it("renders", () => {
     render(<App />);
     expect(screen.getAllByRole("heading", { level: 2 })).toHaveLength(1);
   });
