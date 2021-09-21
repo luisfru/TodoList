@@ -12,7 +12,7 @@ const Todo = ({ handleRemoveElement, handleAddCompleted, text }) => {
 };
 
 Todo.propTypes = {
-  handleRemove: PropTypes.func,
+  handleRemoveElement: PropTypes.func,
   handleAddCompleted: PropTypes.func,
   text: PropTypes.string,
 };
