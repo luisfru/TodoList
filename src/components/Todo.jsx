@@ -14,5 +14,6 @@ const Todo = ({ handleRemoveElement, handleAddCompleted, text }) => {
 Todo.propTypes = {
   handleRemoveElement: PropTypes.func,
   handleAddCompleted: PropTypes.func,
+  text: PropTypes.string,
 };
 export default Todo;
