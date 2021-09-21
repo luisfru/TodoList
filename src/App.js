@@ -35,7 +35,7 @@ function App() {
       <GlobalStyle />
       <h2>TodoList</h2>
       <Form handleTypeText={handleTypeText} handleAddToList={handleAddToList} />
-      <TodoList todoList={todoList} handleRemoveElement={handleRemoveElement} />
+      <TodoList todoList={todoList} ={handleRemoveElement} />
     </div>
   );
 }
