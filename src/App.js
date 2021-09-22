@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import Form from "./Components/Form";
 import TodoList from "./Components/TodoList";
+// import Todo from "./Components/Todo";
 
 import { GlobalStyle } from "./styles/globalStyles";
 
@@ -29,13 +30,15 @@ function App() {
         .concat(todoList.slice(element + 1, todoList.length))
     );
   };
-
+  console.log(handleRemoveElement);
   return (
     <div>
       <GlobalStyle />
       <h2>TodoList</h2>
       <Form handleTypeText={handleTypeText} handleAddToList={handleAddToList} />
-      <TodoList todoList={todoList} handleRemoveElement={handleRemoveElement} />
+      {/* <Todo handleRemoveElement={handleRemoveElement} /> */}
+
+      <TodoList todoList={todoList} />
     </div>
   );
 }
