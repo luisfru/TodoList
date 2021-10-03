@@ -3,7 +3,10 @@ import React, { useState } from "react";
 import Form from "./components/Form";
 import TodoList from "./components/TodoList";
 
-import { STATUS_ALL, STATUS_COMPLETED } from "./constants/todoListStatus";
+import {
+  STATUS_COMPLETED,
+  STATUS_UNCOMPLETED,
+} from "./constants/todoListStatus";
 
 import { GlobalStyle } from "./styles/globalStyles";
 
@@ -22,7 +25,7 @@ function App() {
       {
         text: text,
         id: new Date().valueOf(),
-        status: STATUS_ALL,
+        completed: false,
       },
     ]);
   };
@@ -37,8 +40,7 @@ function App() {
         if (element.id === id) {
           return {
             ...element,
-            status:
-              element.status === STATUS_ALL ? STATUS_COMPLETED : STATUS_ALL,
+            completed: element.completed ? false : true,
           };
         }
         return element;
@@ -54,17 +56,21 @@ function App() {
 
   const handleChangeFilter = (event) => {
     if (event.target.value === STATUS_COMPLETED) {
-      const todoListCompleted = todoList.filter(
-        (element) => element.status === STATUS_COMPLETED
-      );
       setFilterApplied(true);
-      setTodoListFilter(todoListCompleted);
-    } else {
-      setFilterApplied(false);
-      setTodoListFilter([]);
+      setTodoListFilter(todoList.filter((element) => element.completed));
+      return;
     }
-  };
 
+    if (event.target.value === STATUS_UNCOMPLETED) {
+      setFilterApplied(true);
+      setTodoListFilter(todoList.filter((element) => !element.completed));
+      return;
+    }
+
+    setFilterApplied(false);
+    setTodoListFilter([]);
+  };
+  console.log(todoList);
   return (
     <div>
       <GlobalStyle />

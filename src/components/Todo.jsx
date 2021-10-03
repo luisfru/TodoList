@@ -1,21 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { STATUS_COMPLETED } from "../constants/todoListStatus";
-
 import { StyleText } from "../styles/components/Todo";
 
 const Todo = ({
   handleRemoveElement,
   handleAddCompleted,
   text,
-  index,
-  status,
+  completed,
   id,
 }) => {
   return (
     <div>
-      <StyleText strikeThrough={status === STATUS_COMPLETED}>{text}</StyleText>
+      <StyleText strikeThrough={completed}>{text}</StyleText>
       <button onClick={() => handleAddCompleted(id)}>Complete</button>
       <button onClick={() => handleRemoveElement(id)}>Remove</button>
     </div>
@@ -25,8 +22,8 @@ const Todo = ({
 Todo.propTypes = {
   handleRemoveElement: PropTypes.func,
   handleAddCompleted: PropTypes.func,
+  completed: PropTypes.bool,
   text: PropTypes.string,
-  index: PropTypes.number,
   id: PropTypes.number,
 };
 

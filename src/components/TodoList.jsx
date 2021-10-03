@@ -10,7 +10,6 @@ const TodoList = ({ handleRemoveElement, handleAddCompleted, todoList }) => {
         {todoList.map((element, index) => (
           <Todo
             key={index}
-            index={index}
             handleRemoveElement={handleRemoveElement}
             handleAddCompleted={handleAddCompleted}
             {...element}

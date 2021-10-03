@@ -1,7 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { STATUS_ALL, STATUS_COMPLETED } from "../constants/todoListStatus";
+import {
+  STATUS_ALL,
+  STATUS_COMPLETED,
+  STATUS_UNCOMPLETED,
+} from "../constants/todoListStatus";
 
 const Form = ({
   handleTypeText,
@@ -16,6 +20,7 @@ const Form = ({
       <select onChange={handleChangeFilter}>
         <option value={STATUS_ALL}>All</option>
         <option value={STATUS_COMPLETED}>Completed</option>
+        <option value={STATUS_UNCOMPLETED}>Uncompleted</option>
       </select>
     </form>
   );
