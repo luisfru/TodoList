@@ -16,36 +16,40 @@ function App() {
   const handleAddToList = (event) => {
     event.preventDefault();
 
-    const newValue = {
-      text: text,
-      id: new Date().valueOf(),
-      status: STATUS_ALL,
-    };
-
     setText("");
-    setTodoList([...todoList, newValue]);
+    setTodoList([
+      ...todoList,
+      {
+        text: text,
+        id: new Date().valueOf(),
+        status: STATUS_ALL,
+      },
+    ]);
   };
 
   const handleTypeText = (event) => {
     setText(event.target.value);
   };
 
-  const handleAddCompleted = (index) => {
-    const newArray = [...todoList];
-
-    newArray[index].status =
-      newArray[index].status === STATUS_ALL
-        ? (newArray[index].status = STATUS_COMPLETED)
-        : (newArray[index].status = STATUS_ALL);
-
-    filterApplied ? setTodoListFilter(newArray) : setTodoList(newArray);
+  const handleAddCompleted = (id) => {
+    setTodoList(
+      todoList.map((element) => {
+        if (element.id === id) {
+          return {
+            ...element,
+            status:
+              element.status === STATUS_ALL ? STATUS_COMPLETED : STATUS_ALL,
+          };
+        }
+        return element;
+      })
+    );
+    setTodoListFilter(todoListFilter.filter((element) => element.id !== id));
   };
 
-  const handleRemoveElement = (index) => {
-    const newArray = filterApplied ? [...todoListFilter] : [...todoList];
-    newArray.splice(index, 1);
-
-    filterApplied ? setTodoListFilter(newArray) : setTodoList(newArray);
+  const handleRemoveElement = (id) => {
+    setTodoList(todoList.filter((element) => element.id !== id));
+    setTodoListFilter(todoListFilter.filter((element) => element.id !== id));
   };
 
   const handleChangeFilter = (event) => {
