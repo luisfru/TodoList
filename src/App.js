@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import Form from "./components/Form";
 import TodoList from "./components/TodoList";
 
+import { setLocalStorage, getLocalStorage } from "./utils/localStorage";
+
+import { LOCAL_TODO_LIST } from "./constants/localStorage";
 import {
   STATUS_COMPLETED,
   STATUS_UNCOMPLETED,
@@ -11,7 +14,9 @@ import {
 import { GlobalStyle } from "./styles/globalStyles";
 
 function App() {
-  const [todoList, setTodoList] = useState([]);
+  const [todoList, setTodoList] = useState(
+    getLocalStorage(LOCAL_TODO_LIST, [])
+  );
   const [todoListFilter, setTodoListFilter] = useState([]);
   const [filterApplied, setFilterApplied] = useState(false);
   const [text, setText] = useState("");
@@ -19,15 +24,18 @@ function App() {
   const handleAddToList = (event) => {
     event.preventDefault();
 
-    setText("");
-    setTodoList([
+    const newTodoList = [
       ...todoList,
       {
         text: text,
         id: new Date().valueOf(),
         completed: false,
       },
-    ]);
+    ];
+
+    setText("");
+    setTodoList(newTodoList);
+    setLocalStorage(LOCAL_TODO_LIST, newTodoList);
   };
 
   const handleTypeText = (event) => {
@@ -35,22 +43,26 @@ function App() {
   };
 
   const handleAddCompleted = (id) => {
-    setTodoList(
-      todoList.map((element) => {
-        if (element.id === id) {
-          return {
-            ...element,
-            completed: element.completed ? false : true,
-          };
-        }
-        return element;
-      })
-    );
+    const newTodoList = todoList.map((element) => {
+      if (element.id === id) {
+        return {
+          ...element,
+          completed: element.completed ? false : true,
+        };
+      }
+      return element;
+    });
+
+    setLocalStorage(LOCAL_TODO_LIST, newTodoList);
+    setTodoList(newTodoList);
     setTodoListFilter(todoListFilter.filter((element) => element.id !== id));
   };
 
   const handleRemoveElement = (id) => {
-    setTodoList(todoList.filter((element) => element.id !== id));
+    const newTodoList = todoList.filter((element) => element.id !== id);
+
+    setLocalStorage(LOCAL_TODO_LIST, newTodoList);
+    setTodoList(newTodoList);
     setTodoListFilter(todoListFilter.filter((element) => element.id !== id));
   };
 
@@ -70,7 +82,7 @@ function App() {
     setFilterApplied(false);
     setTodoListFilter([]);
   };
-  console.log(todoList);
+
   return (
     <div>
       <GlobalStyle />
