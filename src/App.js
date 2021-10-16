@@ -5,10 +5,15 @@ import TodoList from "./components/TodoList";
 
 import { setLocalStorage, getLocalStorage } from "./utils/localStorage";
 
-import { LOCAL_TODO_LIST } from "./constants/localStorage";
+import {
+  LOCAL_TODO_LIST,
+  LOCAL_TODO_LIST_DELETED,
+} from "./constants/localStorage";
 import {
   STATUS_COMPLETED,
+  STATUS_DELETED,
   STATUS_UNCOMPLETED,
+  STATUS_ALL,
 } from "./constants/todoListStatus";
 
 import { GlobalStyle } from "./styles/globalStyles";
@@ -17,8 +22,11 @@ function App() {
   const [todoList, setTodoList] = useState(
     getLocalStorage(LOCAL_TODO_LIST, [])
   );
+  const [todoListDeleted, setTodoListDeleted] = useState(
+    getLocalStorage(LOCAL_TODO_LIST_DELETED, [])
+  );
   const [todoListFilter, setTodoListFilter] = useState([]);
-  const [filterApplied, setFilterApplied] = useState(false);
+  const [filterApplied, setFilterApplied] = useState(STATUS_ALL);
   const [text, setText] = useState("");
 
   const handleAddToList = (event) => {
@@ -60,27 +68,54 @@ function App() {
 
   const handleRemoveElement = (id) => {
     const newTodoList = todoList.filter((element) => element.id !== id);
+    const newTodoListDeleted = [
+      ...todoListDeleted,
+      ...todoList.filter((element) => element.id === id),
+    ];
 
     setLocalStorage(LOCAL_TODO_LIST, newTodoList);
+    setLocalStorage(LOCAL_TODO_LIST_DELETED, newTodoListDeleted);
+
     setTodoList(newTodoList);
+    setTodoListDeleted(newTodoListDeleted);
     setTodoListFilter(todoListFilter.filter((element) => element.id !== id));
   };
 
   const handleChangeFilter = (event) => {
     if (event.target.value === STATUS_COMPLETED) {
-      setFilterApplied(true);
+      setFilterApplied(STATUS_COMPLETED);
       setTodoListFilter(todoList.filter((element) => element.completed));
       return;
     }
 
     if (event.target.value === STATUS_UNCOMPLETED) {
-      setFilterApplied(true);
+      setFilterApplied(STATUS_UNCOMPLETED);
       setTodoListFilter(todoList.filter((element) => !element.completed));
       return;
     }
 
-    setFilterApplied(false);
+    if (event.target.value === STATUS_DELETED) {
+      setFilterApplied(STATUS_DELETED);
+      return;
+    }
+
+    setFilterApplied(STATUS_ALL);
     setTodoListFilter([]);
+  };
+
+  const getTodoList = () => {
+    if (
+      filterApplied === STATUS_COMPLETED ||
+      filterApplied === STATUS_UNCOMPLETED
+    ) {
+      return todoListFilter;
+    }
+
+    if (filterApplied === STATUS_DELETED) {
+      return todoListDeleted;
+    }
+
+    return todoList;
   };
 
   return (
@@ -94,7 +129,7 @@ function App() {
         text={text}
       />
       <TodoList
-        todoList={filterApplied ? todoListFilter : todoList}
+        todoList={getTodoList()}
         handleRemoveElement={handleRemoveElement}
         handleAddCompleted={handleAddCompleted}
       />

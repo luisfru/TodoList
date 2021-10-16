@@ -5,6 +5,7 @@ import {
   STATUS_ALL,
   STATUS_COMPLETED,
   STATUS_UNCOMPLETED,
+  STATUS_DELETED,
 } from "../constants/todoListStatus";
 
 const Form = ({
@@ -21,6 +22,7 @@ const Form = ({
         <option value={STATUS_ALL}>All</option>
         <option value={STATUS_COMPLETED}>Completed</option>
         <option value={STATUS_UNCOMPLETED}>Uncompleted</option>
+        <option value={STATUS_DELETED}>Deleted</option>
       </select>
     </form>
   );
