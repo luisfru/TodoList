@@ -16,7 +16,7 @@ import {
   STATUS_ALL,
 } from "./constants/todoListStatus";
 
-import { GlobalStyle } from "./styles/globalStyles";
+import { GlobalStyle } from "./styles/GlobalStyles";
 
 function App() {
   const [todoList, setTodoList] = useState(

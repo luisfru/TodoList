@@ -1,0 +1,107 @@
+@font-face {
+  font-family: "Roboto";
+  src: url("./woff2/Roboto-Black.woff2") format("woff2"),
+    url("./woff/Roboto-Black.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("./woff2/Roboto-BlackItalic.woff2") format("woff2"),
+    url("./woff/Roboto-BlackItalic.woff") format("woff");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("./woff2/Roboto-Regular.woff2") format("woff2"),
+    url("./woff/Roboto-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("./woff2/Roboto-BoldItalic.woff2") format("woff2"),
+    url("./woff/Roboto-BoldItalic.woff") format("woff");
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("./woff2/Roboto-LightItalic.woff2") format("woff2"),
+    url("./woff/Roboto-LightItalic.woff") format("woff");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("./woff2/Roboto-Medium.woff2") format("woff2"),
+    url("./woff/Roboto-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("./woff2/Roboto-Bold.woff2") format("woff2"),
+    url("./woff/Roboto-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("./woff2/Roboto-Italic.woff2") format("woff2"),
+    url("./woff/Roboto-Italic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("./woff2/Roboto-Light.woff2") format("woff2"),
+    url("./woff/Roboto-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("./woff2/Roboto-Thin.woff2") format("woff2"),
+    url("./woff/Roboto-Thin.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("./woff2/Roboto-ThinItalic.woff2") format("woff2"),
+    url("./woff/Roboto-ThinItalic.woff") format("woff");
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("./woff2/Roboto-MediumItalic.woff2") format("woff2"),
+    url("./woff/Roboto-MediumItalic.woff") format("woff");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
