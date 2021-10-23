@@ -3,7 +3,12 @@ import PropTypes from "prop-types";
 
 import Todo from "./Todo";
 
-const TodoList = ({ handleRemoveElement, handleAddCompleted, todoList }) => {
+const TodoList = ({
+  handleRemoveElement,
+  handleAddCompleted,
+  handleShowModal,
+  todoList,
+}) => {
   return (
     <div>
       <div>
@@ -12,6 +17,7 @@ const TodoList = ({ handleRemoveElement, handleAddCompleted, todoList }) => {
             key={index}
             handleRemoveElement={handleRemoveElement}
             handleAddCompleted={handleAddCompleted}
+            handleShowModal={handleShowModal}
             {...element}
           />
         ))}
@@ -23,6 +29,7 @@ const TodoList = ({ handleRemoveElement, handleAddCompleted, todoList }) => {
 TodoList.propTypes = {
   handleRemoveElement: PropTypes.func,
   handleAddCompleted: PropTypes.func,
+  handleShowModal: PropTypes.func,
   todoList: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
 };
 

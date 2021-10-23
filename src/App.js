@@ -4,6 +4,8 @@ import Form from "./components/Form";
 import TodoList from "./components/TodoList";
 import ModalRemove from "./components/ModalRemove";
 
+import { FilterStatus } from "./context/FilterStatus";
+
 import { setLocalStorage, getLocalStorage } from "./utils/localStorage";
 
 import {
@@ -29,6 +31,7 @@ function App() {
   const [todoListFilter, setTodoListFilter] = useState([]);
   const [filterApplied, setFilterApplied] = useState(STATUS_ALL);
   const [text, setText] = useState("");
+  const [showModal, setShowModal] = useState(false);
 
   const handleAddToList = (event) => {
     event.preventDefault();
@@ -119,10 +122,14 @@ function App() {
     return todoList;
   };
 
+  const handleShowModal = () => {
+    setShowModal(!showModal);
+  };
+
   return (
     <div>
       <GlobalStyles />
-      <ModalRemove />
+      {showModal && <ModalRemove />}
       <h2>TodoList</h2>
       <Form
         handleTypeText={handleTypeText}
@@ -130,11 +137,14 @@ function App() {
         handleChangeFilter={handleChangeFilter}
         text={text}
       />
-      <TodoList
-        todoList={getTodoList()}
-        handleRemoveElement={handleRemoveElement}
-        handleAddCompleted={handleAddCompleted}
-      />
+      <FilterStatus.Provider value={filterApplied}>
+        <TodoList
+          todoList={getTodoList()}
+          handleRemoveElement={handleRemoveElement}
+          handleAddCompleted={handleAddCompleted}
+          handleShowModal={handleShowModal}
+        />
+      </FilterStatus.Provider>
     </div>
   );
 }
