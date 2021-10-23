@@ -16,7 +16,7 @@ import {
   STATUS_ALL,
 } from "./constants/todoListStatus";
 
-import { GlobalStyle } from "./styles/GlobalStyles";
+import { GlobalStyles } from "./styles/GlobalStyles";
 
 function App() {
   const [todoList, setTodoList] = useState(
@@ -120,7 +120,7 @@ function App() {
 
   return (
     <div>
-      <GlobalStyle />
+      <GlobalStyles />
       <h2>TodoList</h2>
       <Form
         handleTypeText={handleTypeText}
