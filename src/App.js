@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import Form from "./components/Form";
 import TodoList from "./components/TodoList";
+import ModalRemove from "./components/ModalRemove";
 
 import { setLocalStorage, getLocalStorage } from "./utils/localStorage";
 
@@ -121,6 +122,7 @@ function App() {
   return (
     <div>
       <GlobalStyles />
+      <ModalRemove />
       <h2>TodoList</h2>
       <Form
         handleTypeText={handleTypeText}
