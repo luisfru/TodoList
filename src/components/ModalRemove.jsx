@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import {
   StyleModalRemoveBase,
@@ -7,24 +8,32 @@ import {
   StyleModalFooter,
 } from "../styles/components/ModalRemove";
 
-const ModalRemove = () => {
+const ModalRemove = ({ handleCloseModal }) => {
+  const prueba = () => {
+    console.log("funciona");
+  };
   return (
-    <StyleModalRemoveBase>
-      <StyleModalMain>
-        <StyleModalHeader>
-          <h1>ModalRemove</h1>
-          <button>Cerrar</button>
-        </StyleModalHeader>
-        <div>
-          <p>¿Estas seguro que deseas eliminar?</p>
-        </div>
-        <StyleModalFooter>
-          <button>Cancelar</button>
-          <button>Borrar</button>
-        </StyleModalFooter>
-      </StyleModalMain>
-    </StyleModalRemoveBase>
+    <button onclick={prueba}>Cerrar</button>
+    // <StyleModalRemoveBase>
+    //   <StyleModalMain>
+    //     <StyleModalHeader>
+    //       <h1>ModalRemove</h1>
+    //       <button onclick={prueba()}>Cerrar</button>
+    //     </StyleModalHeader>
+    //     <div>
+    //       <p>¿Estas seguro que deseas eliminar?</p>
+    //     </div>
+    //     <StyleModalFooter>
+    //       {/* <button onclick={handleCloseModal}>Cancelar</button> */}
+    //       <button>Borrar</button>
+    //     </StyleModalFooter>
+    //   </StyleModalMain>
+    // </StyleModalRemoveBase>
   );
+};
+
+ModalRemove.propTypes = {
+  handleCloseModal: PropTypes.func,
 };
 
 export default ModalRemove;
