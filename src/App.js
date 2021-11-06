@@ -126,16 +126,14 @@ function App() {
     setShowModal(true);
   };
 
-  const handleCloseModal = (event) => {
-    console.log(event);
-    // setShowModal(false);
+  const handleCloseModal = () => {
+    setShowModal(false);
   };
 
   return (
     <div>
       <GlobalStyles />
-      <ModalRemove handleCloseModal={handleCloseModal} />
-      {/* {showModal && <ModalRemove handleCloseModal={handleCloseModal} />} */}
+      {showModal && <ModalRemove handleCloseModal={handleCloseModal} />}
       <h2>TodoList</h2>
       <Form
         handleTypeText={handleTypeText}

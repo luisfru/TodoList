@@ -30,7 +30,13 @@ TodoList.propTypes = {
   handleRemoveElement: PropTypes.func,
   handleAddCompleted: PropTypes.func,
   handleShowModal: PropTypes.func,
-  todoList: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
+  todoList: PropTypes.arrayOf(
+    PropTypes.shape({
+      completed: PropTypes.bool,
+      text: PropTypes.string,
+      id: PropTypes.number,
+    })
+  ),
 };
 
 export default TodoList;
