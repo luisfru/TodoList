@@ -22,7 +22,7 @@ const Todo = ({
       <StyleText strikeThrough={completed}>{text}</StyleText>
       <button onClick={() => handleAddCompleted(id)}>Complete</button>
       {filterStatus === STATUS_DELETED ? (
-        <button onClick={() => handleShowModal()}>Remove</button>
+        <button onClick={() => handleShowModal(id)}>Remove</button>
       ) : (
         <button onClick={() => handleRemoveElement(id)}>Remove</button>
       )}

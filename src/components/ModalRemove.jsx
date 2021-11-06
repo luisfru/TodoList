@@ -8,7 +8,7 @@ import {
   StyleModalFooter,
 } from "../styles/components/ModalRemove";
 
-const ModalRemove = ({ handleCloseModal }) => {
+const ModalRemove = ({ handleCloseModal, handleRemoveElementFromDeleted }) => {
   return (
     <StyleModalRemoveBase>
       <StyleModalMain>
@@ -21,7 +21,7 @@ const ModalRemove = ({ handleCloseModal }) => {
         </div>
         <StyleModalFooter>
           <button onClick={handleCloseModal}>Cancelar</button>
-          <button>Borrar</button>
+          <button onClick={handleRemoveElementFromDeleted}>Borrar</button>
         </StyleModalFooter>
       </StyleModalMain>
     </StyleModalRemoveBase>
@@ -30,6 +30,7 @@ const ModalRemove = ({ handleCloseModal }) => {
 
 ModalRemove.propTypes = {
   handleCloseModal: PropTypes.func,
+  handleRemoveElementFromDeleted: PropTypes.func,
 };
 
 export default ModalRemove;

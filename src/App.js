@@ -32,6 +32,7 @@ function App() {
   const [filterApplied, setFilterApplied] = useState(STATUS_ALL);
   const [text, setText] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [elementIdRemove, setElementIdRemove] = useState(null);
 
   const handleAddToList = (event) => {
     event.preventDefault();
@@ -122,7 +123,8 @@ function App() {
     return todoList;
   };
 
-  const handleShowModal = () => {
+  const handleShowModal = (id) => {
+    setElementIdRemove(id);
     setShowModal(true);
   };
 
@@ -130,10 +132,27 @@ function App() {
     setShowModal(false);
   };
 
+  const handleRemoveElementFromDeleted = () => {
+    const newTodoListDeleted = todoListDeleted.filter(
+      (element) => element.id !== elementIdRemove
+    );
+
+    setLocalStorage(LOCAL_TODO_LIST_DELETED, newTodoListDeleted);
+
+    setTodoListDeleted(newTodoListDeleted);
+    setElementIdRemove(null);
+    setShowModal(false);
+  };
+
   return (
     <div>
       <GlobalStyles />
-      {showModal && <ModalRemove handleCloseModal={handleCloseModal} />}
+      {showModal && (
+        <ModalRemove
+          handleCloseModal={handleCloseModal}
+          handleRemoveElementFromDeleted={handleRemoveElementFromDeleted}
+        />
+      )}
       <h2>TodoList</h2>
       <Form
         handleTypeText={handleTypeText}
