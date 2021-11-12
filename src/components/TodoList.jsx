@@ -6,6 +6,7 @@ import Todo from "./Todo";
 const TodoList = ({
   handleRemoveElement,
   handleAddCompleted,
+  handleSetTextEditedInTodoList,
   handleShowModal,
   todoList,
 }) => {
@@ -17,6 +18,7 @@ const TodoList = ({
             key={index}
             handleRemoveElement={handleRemoveElement}
             handleAddCompleted={handleAddCompleted}
+            handleSetTextEditedInTodoList={handleSetTextEditedInTodoList}
             handleShowModal={handleShowModal}
             {...element}
           />
@@ -29,6 +31,7 @@ const TodoList = ({
 TodoList.propTypes = {
   handleRemoveElement: PropTypes.func,
   handleAddCompleted: PropTypes.func,
+  handleSetTextEditedInTodoList: PropTypes.func,
   handleShowModal: PropTypes.func,
   todoList: PropTypes.arrayOf(
     PropTypes.shape({

@@ -82,6 +82,60 @@ function App() {
     setTodoListFilter(todoListFilter.filter((element) => element.id !== id));
   };
 
+  const handleSetTextEditedInTodoList = (id, textEdited) => {
+    const isInTodoList = !!todoList.find((element) => element.id === id);
+    const isInTodoListFilter = !!todoListFilter.find(
+      (element) => element.id === id
+    );
+    const isInTodoListDeleted = !!todoListDeleted.find(
+      (element) => element.id === id
+    );
+
+    if (isInTodoList) {
+      const newTodoList = todoList.map((element) => {
+        if (element.id === id) {
+          return {
+            ...element,
+            text: textEdited,
+          };
+        }
+        return element;
+      });
+
+      setTodoList(newTodoList);
+      setLocalStorage(LOCAL_TODO_LIST, newTodoList);
+    }
+
+    if (isInTodoListFilter) {
+      const newTodoListFilter = todoListFilter.map((element) => {
+        if (element.id === id) {
+          return {
+            ...element,
+            text: textEdited,
+          };
+        }
+        return element;
+      });
+
+      setTodoListFilter(newTodoListFilter);
+    }
+
+    if (isInTodoListDeleted) {
+      const newTodoListDeleted = todoListDeleted.map((element) => {
+        if (element.id === id) {
+          return {
+            ...element,
+            text: textEdited,
+          };
+        }
+        return element;
+      });
+
+      setTodoListDeleted(newTodoListDeleted);
+      setLocalStorage(LOCAL_TODO_LIST_DELETED, newTodoListDeleted);
+    }
+  };
+
   const handleRemoveElement = (id) => {
     const newTodoList = todoList.filter((element) => element.id !== id);
     const newTodoListDeleted = [
@@ -176,6 +230,7 @@ function App() {
         <TodoList
           todoList={getTodoList()}
           handleRemoveElement={handleRemoveElement}
+          handleSetTextEditedInTodoList={handleSetTextEditedInTodoList}
           handleAddCompleted={handleAddCompleted}
           handleShowModal={handleShowModal}
         />
