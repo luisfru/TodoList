@@ -13,10 +13,12 @@ const Form = ({
   handleAddToList,
   handleChangeFilter,
   text,
+  error,
 }) => {
   return (
     <form>
       <input onChange={handleTypeText} value={text} />
+      {error && "The Field Cannot Be Empty"}
       <button onClick={handleAddToList}>Add</button>
       <select onChange={handleChangeFilter}>
         <option value={STATUS_ALL}>All</option>
@@ -33,6 +35,7 @@ Form.propTypes = {
   handleAddToList: PropTypes.func,
   handleChangeFilter: PropTypes.func,
   text: PropTypes.string,
+  error: PropTypes.bool,
 };
 
 export default Form;

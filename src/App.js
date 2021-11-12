@@ -7,6 +7,7 @@ import ModalRemove from "./components/ModalRemove";
 import { FilterStatus } from "./context/FilterStatus";
 
 import { setLocalStorage, getLocalStorage } from "./utils/localStorage";
+import { validateInputText } from "./utils/validateForm";
 
 import {
   LOCAL_TODO_LIST,
@@ -33,9 +34,18 @@ function App() {
   const [text, setText] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [elementIdRemove, setElementIdRemove] = useState(null);
+  const [error, setError] = useState(false);
 
   const handleAddToList = (event) => {
     event.preventDefault();
+
+    const isNotValidForm = validateInputText(text);
+
+    if (isNotValidForm) {
+      setError(true);
+      setText("");
+      return;
+    }
 
     const newTodoList = [
       ...todoList,
@@ -46,6 +56,7 @@ function App() {
       },
     ];
 
+    setError(false);
     setText("");
     setTodoList(newTodoList);
     setLocalStorage(LOCAL_TODO_LIST, newTodoList);
@@ -159,6 +170,7 @@ function App() {
         handleAddToList={handleAddToList}
         handleChangeFilter={handleChangeFilter}
         text={text}
+        error={error}
       />
       <FilterStatus.Provider value={filterApplied}>
         <TodoList
