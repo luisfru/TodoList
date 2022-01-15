@@ -30,6 +30,8 @@ function App() {
     getLocalStorage(LOCAL_TODO_LIST_DELETED, [])
   );
   const [todoListFilter, setTodoListFilter] = useState([]);
+  const [todoEditing, setTodoEditing] = useState(null);
+  const [editingText, setEditingText] = useState("");
   const [filterApplied, setFilterApplied] = useState(STATUS_ALL);
   const [text, setText] = useState("");
   const [showModal, setShowModal] = useState(false);
@@ -66,6 +68,14 @@ function App() {
     setText(event.target.value);
   };
 
+  const handleChangeSetTodoEditing = (id) => {
+    setTodoEditing(id);
+  };
+
+  const handleSetEditingText = (text) => {
+    setEditingText(text);
+  };
+
   const handleAddCompleted = (id) => {
     const newTodoList = todoList.map((element) => {
       if (element.id === id) {
@@ -82,7 +92,7 @@ function App() {
     setTodoListFilter(todoListFilter.filter((element) => element.id !== id));
   };
 
-  const handleSetTextEditedInTodoList = (id, textEdited) => {
+  const handleSetEdit = (id) => {
     const isInTodoList = !!todoList.find((element) => element.id === id);
     const isInTodoListFilter = !!todoListFilter.find(
       (element) => element.id === id
@@ -96,7 +106,7 @@ function App() {
         if (element.id === id) {
           return {
             ...element,
-            text: textEdited,
+            text: editingText,
           };
         }
         return element;
@@ -111,7 +121,7 @@ function App() {
         if (element.id === id) {
           return {
             ...element,
-            text: textEdited,
+            text: editingText,
           };
         }
         return element;
@@ -125,7 +135,7 @@ function App() {
         if (element.id === id) {
           return {
             ...element,
-            text: textEdited,
+            text: editingText,
           };
         }
         return element;
@@ -134,6 +144,8 @@ function App() {
       setTodoListDeleted(newTodoListDeleted);
       setLocalStorage(LOCAL_TODO_LIST_DELETED, newTodoListDeleted);
     }
+
+    setTodoEditing(null);
   };
 
   const handleRemoveElement = (id) => {
@@ -229,8 +241,11 @@ function App() {
       <FilterStatus.Provider value={filterApplied}>
         <TodoList
           todoList={getTodoList()}
+          todoEditing={todoEditing}
           handleRemoveElement={handleRemoveElement}
-          handleSetTextEditedInTodoList={handleSetTextEditedInTodoList}
+          handleSetEdit={handleSetEdit}
+          handleSetEditingText={handleSetEditingText}
+          handleChangeSetTodoEditing={handleChangeSetTodoEditing}
           handleAddCompleted={handleAddCompleted}
           handleShowModal={handleShowModal}
         />

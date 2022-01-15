@@ -6,8 +6,11 @@ import Todo from "./Todo";
 const TodoList = ({
   handleRemoveElement,
   handleAddCompleted,
-  handleSetTextEditedInTodoList,
+  handleChangeSetTodoEditing,
+  handleSetEditingText,
+  handleSetEdit,
   handleShowModal,
+  todoEditing,
   todoList,
 }) => {
   return (
@@ -16,9 +19,12 @@ const TodoList = ({
         {todoList.map((element, index) => (
           <Todo
             key={index}
+            todoEditing={todoEditing}
             handleRemoveElement={handleRemoveElement}
+            handleChangeSetTodoEditing={handleChangeSetTodoEditing}
+            handleSetEditingText={handleSetEditingText}
+            handleSetEdit={handleSetEdit}
             handleAddCompleted={handleAddCompleted}
-            handleSetTextEditedInTodoList={handleSetTextEditedInTodoList}
             handleShowModal={handleShowModal}
             {...element}
           />
@@ -31,8 +37,11 @@ const TodoList = ({
 TodoList.propTypes = {
   handleRemoveElement: PropTypes.func,
   handleAddCompleted: PropTypes.func,
-  handleSetTextEditedInTodoList: PropTypes.func,
+  handleChangeSetTodoEditing: PropTypes.func,
+  handleSetEditingText: PropTypes.func,
+  handleSetEdit: PropTypes.func,
   handleShowModal: PropTypes.func,
+  todoEditing: PropTypes.number,
   todoList: PropTypes.arrayOf(
     PropTypes.shape({
       completed: PropTypes.bool,
