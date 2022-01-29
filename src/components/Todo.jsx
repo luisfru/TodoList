@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 
-import { FilterStatus } from "../context/FilterStatus";
+import PropTypes from "prop-types";
 
 import { STATUS_DELETED } from "../constants/todoListStatus";
 
@@ -14,18 +13,19 @@ const Todo = ({
   handleSetEdit,
   handleAddCompleted,
   handleShowModal,
+  editingText,
   todoEditing,
+  filterApplied,
   text,
   completed,
   id,
 }) => {
-  const filterStatus = useContext(FilterStatus);
-
   if (todoEditing === id) {
     return (
       <div>
         <input
-          value={text}
+          type="text"
+          value={editingText}
           onChange={(event) => handleSetEditingText(event.target.value)}
         />
         <button onClick={() => handleSetEdit(id)}>Save</button>
@@ -35,13 +35,25 @@ const Todo = ({
 
   return (
     <div>
-      <StyleText strikeThrough={completed}>{text}</StyleText>
-      <button onClick={() => handleChangeSetTodoEditing(id)}>Edit</button>
-      <button onClick={() => handleAddCompleted(id)}>Complete</button>
-      {filterStatus === STATUS_DELETED ? (
-        <button onClick={() => handleShowModal(id)}>Remove</button>
+      {filterApplied === STATUS_DELETED ? (
+        <>
+          <StyleText strikeThrough={completed}>{text}</StyleText>
+          <button onClick={() => handleShowModal(id)}>Remove</button>
+        </>
       ) : (
-        <button onClick={() => handleRemoveElement(id)}>Remove</button>
+        <>
+          <input
+            type="checkbox"
+            checked={completed}
+            onChange={() => handleAddCompleted(id)}
+          />
+          <StyleText strikeThrough={completed}>{text}</StyleText>
+          <button onClick={() => handleChangeSetTodoEditing(id, text)}>
+            Edit
+          </button>
+          <button onClick={() => handleAddCompleted(id)}>Complete</button>
+          <button onClick={() => handleRemoveElement(id)}>Remove</button>
+        </>
       )}
     </div>
   );
@@ -55,7 +67,9 @@ Todo.propTypes = {
   handleSetEdit: PropTypes.func,
   handleSetTextEditedInTodoList: PropTypes.func,
   handleShowModal: PropTypes.func,
+  editingText: PropTypes.string,
   todoEditing: PropTypes.number,
+  filterApplied: PropTypes.string,
   completed: PropTypes.bool,
   text: PropTypes.string,
   id: PropTypes.number,

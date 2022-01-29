@@ -4,8 +4,6 @@ import Form from "./components/Form";
 import TodoList from "./components/TodoList";
 import ModalRemove from "./components/ModalRemove";
 
-import { FilterStatus } from "./context/FilterStatus";
-
 import { setLocalStorage, getLocalStorage } from "./utils/localStorage";
 import { validateInputText } from "./utils/validateForm";
 
@@ -68,7 +66,8 @@ function App() {
     setText(event.target.value);
   };
 
-  const handleChangeSetTodoEditing = (id) => {
+  const handleChangeSetTodoEditing = (id, text) => {
+    setEditingText(text);
     setTodoEditing(id);
   };
 
@@ -238,18 +237,18 @@ function App() {
         text={text}
         error={error}
       />
-      <FilterStatus.Provider value={filterApplied}>
-        <TodoList
-          todoList={getTodoList()}
-          todoEditing={todoEditing}
-          handleRemoveElement={handleRemoveElement}
-          handleSetEdit={handleSetEdit}
-          handleSetEditingText={handleSetEditingText}
-          handleChangeSetTodoEditing={handleChangeSetTodoEditing}
-          handleAddCompleted={handleAddCompleted}
-          handleShowModal={handleShowModal}
-        />
-      </FilterStatus.Provider>
+      <TodoList
+        todoList={getTodoList()}
+        filterApplied={filterApplied}
+        todoEditing={todoEditing}
+        editingText={editingText}
+        handleRemoveElement={handleRemoveElement}
+        handleSetEdit={handleSetEdit}
+        handleSetEditingText={handleSetEditingText}
+        handleChangeSetTodoEditing={handleChangeSetTodoEditing}
+        handleAddCompleted={handleAddCompleted}
+        handleShowModal={handleShowModal}
+      />
     </div>
   );
 }

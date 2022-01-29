@@ -10,8 +10,10 @@ const TodoList = ({
   handleSetEditingText,
   handleSetEdit,
   handleShowModal,
+  editingText,
   todoEditing,
   todoList,
+  filterApplied,
 }) => {
   return (
     <div>
@@ -19,7 +21,9 @@ const TodoList = ({
         {todoList.map((element, index) => (
           <Todo
             key={index}
+            filterApplied={filterApplied}
             todoEditing={todoEditing}
+            editingText={editingText}
             handleRemoveElement={handleRemoveElement}
             handleChangeSetTodoEditing={handleChangeSetTodoEditing}
             handleSetEditingText={handleSetEditingText}
@@ -41,6 +45,7 @@ TodoList.propTypes = {
   handleSetEditingText: PropTypes.func,
   handleSetEdit: PropTypes.func,
   handleShowModal: PropTypes.func,
+  editingText: PropTypes.string,
   todoEditing: PropTypes.number,
   todoList: PropTypes.arrayOf(
     PropTypes.shape({
@@ -49,6 +54,7 @@ TodoList.propTypes = {
       id: PropTypes.number,
     })
   ),
+  filterApplied: PropTypes.string,
 };
 
 export default TodoList;
